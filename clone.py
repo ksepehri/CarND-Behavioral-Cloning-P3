@@ -42,12 +42,13 @@ X_train = np.array(images)
 y_train = np.array(measurements)
 
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Dropout, Activation
+from keras.layers import Flatten, Dense, Lambda, Dropout, Activation, Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
 model = Sequential()
 model.add(Lambda(lambda x:(x /255.0) - 0.5, input_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((70,25),(0,0))))
 model.add(Convolution2D(32, 3, 3))
 model.add(MaxPooling2D((2, 2)))
 model.add(Dropout(.5))
