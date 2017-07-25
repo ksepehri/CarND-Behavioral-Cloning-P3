@@ -2,3 +2,4 @@
 data/
 mac_sim.app/
 my_data*
+.clone.py.*

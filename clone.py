@@ -13,16 +13,26 @@ print('Number of lines: {}'.format(len(lines)))
 
 images = []
 measurements = []
-
+correction_factor = 0.2
 for line in lines:
-	source_path = line[0]
-	filename = source_path.split('/')[-1]
-	current_path = 'my_data/IMG/' + filename
-	# print(current_path)
-	image = cv2.imread(current_path)
-	images.append(image)
-	measurement = line[3]
-	measurements.append(measurement)
+	for i in range(3):
+		source_path = line[i]
+		filename = source_path.split('/')[-1]
+		current_path = 'my_data/IMG/' + filename
+		# print(current_path)
+		image = cv2.imread(current_path)
+		images.append(image)
+		measurement = float(line[3])
+		if i == 1:
+			measurement += correction_factor
+		if i == 2:
+			measurement -= correction_factor
+		measurements.append(measurement)
+		#flip image and measurement and add to data as well
+		image_flipped = np.fliplr(image)
+		images.append(image_flipped)
+		measurement_flipped = -measurement
+		measurements.append(measurement_flipped)
 
 print('Number of images: {}'.format(len(images)))
 print('Number of measurements: {}'.format(len(measurements)))
