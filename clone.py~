@@ -1,0 +1,29 @@
+import csv
+import cv2
+
+# Basic load code copied from lecture video
+
+lines = []
+with open('my_data/driving_log.csv') as csvfile:
+	reader = csv.reader(csvfile)
+	for line in reader:
+		lines.append(line)
+
+print('Number of lines: {}'.format(len(lines)))
+
+images = []
+measurements = []
+
+for line in lines:
+	source_path = line[0]
+	filename = source_path.split('/')[-1]
+	current_path = 'my_data/IMG/' + filename
+	print(current_path)
+	image = cv2.imread(current_path)
+	measurement = line[3]
+	measurements.append(measurement)
+
+print('Number of images: {}'.format(len(images)))
+print('Number of measurements: {}'.format(len(measurements)))
+
+
