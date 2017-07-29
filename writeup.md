@@ -99,15 +99,15 @@ At the end of the process, the vehicle was able to drive autonomously around the
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
-24@5x5 Convolution
-36@5x5 Convolution
-48@5x5 Convolution
-64@3x3 Convolution
-64@3x3 Convolution
-1x1 Max Pooling
-Flatten
-50% Dropout
-Dense
+1. 24@5x5 Convolution
+1. 36@5x5 Convolution
+1. 48@5x5 Convolution
+1. 64@3x3 Convolution
+1. 64@3x3 Convolution
+1. 1x1 Max Pooling
+1. Flatten
+1. 50% Dropout
+1. Dense
 
 ####3. Creation of the Training Set & Training Process
 
