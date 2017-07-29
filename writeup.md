@@ -10,9 +10,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
+[image1]: ./writeup-media/left_2017_07_28_13_49_53_447.jpg "Left"
+[image2]: ./examples/center_2017_07_28_13_49_53_447.jpg "Center"
+[image3]: ./examples/right_2017_07_28_13_49_53_447.jpg "Right"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
 [image6]: ./examples/placeholder_small.png "Normal Image"
@@ -30,7 +30,7 @@ My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeupd.mdsummarizing the results
+* writeupd.md summarizing the results
 
 ####2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -46,9 +46,13 @@ The model.py file contains the code for training and saving the convolution neur
 
 ####1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+My model consists of a convolution neural network based on the Nvidia model() with 5 convolutional layers going from 5x5 to 3x3 filter sizes and depths between 24 and 64 (model.py lines 18-24) **
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). **
+
+Max pooling is used after the convolutions to **
+
+Finally the model is flattened and dropout is applied. Dropout is used so that "the network can't rely on any given activation to be present. The network is forced to learn a redundant representation for everything." (Vincent Vanhouke)
 
 ####2. Attempts to reduce overfitting in the model
 
@@ -62,9 +66,12 @@ The model used an adam optimizer, so the learning rate was not tuned manually (m
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road, driving the track counterclockwise
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road, driving the track counterclockwise. I used center, left, and right images. I found that this really helped train the car on center lane driving. 
 
-For details about how I created the training data, see the next section. 
+Additionally I recorded extra data for problem areas.
+1. Red and white lines instead of yellow lines
+2. Bridge
+3. Dirt area after bridge
 
 ###Model Architecture and Training Strategy
 
@@ -72,7 +79,7 @@ For details about how I created the training data, see the next section.
 
 The overall strategy for deriving a model architecture was to ...
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+My first step was to use a convolution neural network model similar to the Nvidia model. I thought this model might be appropriate because it was proven by them to be helpful for autonomous driving.
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 

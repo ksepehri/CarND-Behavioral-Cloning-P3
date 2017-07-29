@@ -43,7 +43,7 @@ validation_generator = generator(validation_samples, batch_size=32)
 ch, row, col = 3, 80, 320  # Trimmed image format
 
 from keras.models import Sequential, Model
-from keras.layers import Flatten, Dense, Lambda, Dropout, Activation
+from keras.layers import Flatten, Dense, Lambda, Dropout, Activation, Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
@@ -52,11 +52,16 @@ model = Sequential()
 model.add(Lambda(lambda x: x/127.5 - 1.,
         input_shape=(ch, row, col),
         output_shape=(ch, row, col)))
-model.add(Convolution2D(32, 3, 3))
-model.add(MaxPooling2D((2, 2)))
-model.add(Dropout(.5))
-model.add(Activation('relu'))
+model.add(Cropping2D(cropping=((70,25),(0,0))))
+model.add(Convolution2D(24, 5, 5,subsample=(2,2),activation="relu"))
+model.add(Convolution2D(36, 5, 5,subsample=(2,2),activation="relu"))
+model.add(Convolution2D(48, 3, 3,subsample=(2,2),activation="relu"))
+model.add(Convolution2D(64, 3, 3,activation="relu"))
+model.add(Convolution2D(64, 3, 3,activation="relu"))
 model.add(Flatten())
+model.add(Dense(100))
+model.add(Dense(50))
+model.add(Dense(10))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')

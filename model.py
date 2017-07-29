@@ -50,28 +50,16 @@ model = Sequential()
 model.add(Lambda(lambda x:(x /255.0) - 0.5, input_shape=(160,320,3)))
 model.add(Cropping2D(cropping=((70,25),(0,0))))
 model.add(Convolution2D(24, 5, 5,subsample=(2,2),activation="relu"))
-model.add(Convolution2D(36, 5, 5,subsample=(2,2),activation="relu"))
-model.add(Convolution2D(48, 5, 5,subsample=(2,2),activation="relu"))
-model.add(Convolution2D(64, 3, 3,activation="relu"))
-model.add(Convolution2D(64, 3, 3,activation="relu"))
-model.add(MaxPooling2D((1, 1)))
-model.add(Dropout(.5))
 model.add(Flatten())
-model.add(Dense(100))
-model.add(Dense(50))
-model.add(Dense(10))
 model.add(Dense(1))
 
+nb_epochs = 3
+
 model.compile(loss='mse', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=1)
+model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=nb_epochs)
 
 
 
 model.save('model.h5')
-
-import matplotlib.pyplot as plt
-plt.hist(y_train, bins=50)
-plt.show()
-
 
 exit()
