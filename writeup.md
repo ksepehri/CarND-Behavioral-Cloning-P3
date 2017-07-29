@@ -120,7 +120,9 @@ To capture good driving behavior, I first recorded two laps on track one using c
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover from a bad position. I would only record the recovery and not driving over to the line in order to only teach the model "good" behavior. These images show what a recovery looks like:
 
 ![alt text][image4]
+
 ![alt text][image5]
+
 ![alt text][image6]
 
 Then I repeated this process on track two in order to get more data points.
